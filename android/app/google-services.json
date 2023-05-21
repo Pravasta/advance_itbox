@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "328496191094",
+    "project_id": "clone-sea-talk-baru",
+    "storage_bucket": "clone-sea-talk-baru.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:328496191094:android:d97dc8dd0f21473276b157",
+        "android_client_info": {
+          "package_name": "com.example.todos"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "328496191094-gcm4ir6lsun2v3tc74m6to45rnpfvqp2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC1LYBrVW07JbWA7nv58JdLMUEHhSfsuho"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "328496191094-gcm4ir6lsun2v3tc74m6to45rnpfvqp2.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "328496191094-ma4vk4ajqhd1ep17o2mvq0ignqjpp03e.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.fitrayanaf11.cloneSeaTalk"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

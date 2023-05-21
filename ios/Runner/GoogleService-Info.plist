@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>328496191094-o7icmtcj4tacsfoocv7inul1elma6kkl.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.328496191094-o7icmtcj4tacsfoocv7inul1elma6kkl</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>328496191094-p0c5hd51uqi10d0r1m6ibobhm8g0l808.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyBBOiF_9G-rnJtI7Z6BMsK2FtcEBXcSZ3Q</string>
+	<key>GCM_SENDER_ID</key>
+	<string>328496191094</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.example.todos</string>
+	<key>PROJECT_ID</key>
+	<string>clone-sea-talk-baru</string>
+	<key>STORAGE_BUCKET</key>
+	<string>clone-sea-talk-baru.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:328496191094:ios:b30e8c21399c6abc76b157</string>
+</dict>
+</plist>
