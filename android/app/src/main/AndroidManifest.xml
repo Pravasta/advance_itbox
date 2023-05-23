@@ -1,8 +1,14 @@
-<manifest xmlns:android="http://schemas.android.com/apk/res/android">
-    <application
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.advance_itbox">
+    <uses-permission android:name="android.permission.QUERY_ALL_PACKAGES"/>
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION"/>
+   <application
         android:label="todos"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
+        <!-- UNTUK GOOGLE API KEY BUATA ANDROID -->
+        <meta-data android:name="com.google.android.geo.API_KEY" android:value="AIzaSyBOG-I3cbjw6bWKZpCGyHxrTNM2zgRZb08"/>
         <activity
             android:name=".MainActivity"
             android:exported="true"

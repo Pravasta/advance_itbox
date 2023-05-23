@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:todos/function.dart';
+import 'package:todos/models/place_location_models.dart';
 import 'package:todos/models/todo_models.dart';
+import 'package:todos/pages/widget/maps_widget.dart';
 
 class TodoDetailScreen extends StatefulWidget {
   const TodoDetailScreen({super.key, required this.todoModel});
@@ -142,34 +144,84 @@ class _TodoDetailScreenState extends State<TodoDetailScreen> {
                 const SizedBox(height: 25),
                 const Text('Catatan'),
                 const SizedBox(height: 10),
-                Container(
-                  width: double.infinity,
-                  padding: const EdgeInsets.all(16),
-                  decoration: BoxDecoration(
-                    border: Border.all(width: 0.5),
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: const Center(
-                    child: Text(
-                      'Ketuk untuk tambahkan catatan...',
-                    ),
-                  ),
+                GestureDetector(
+                  onTap: () async {
+                    // Ada kemungkinan null jika tidak jadi mengisi note
+                    String? note = await showDialog(
+                      context: context,
+                      builder: (context) {
+                        String tempNote = _todoModel.note;
+                        return Dialog(
+                          child: Container(
+                            padding: const EdgeInsets.fromLTRB(16, 16, 16, 0),
+                            child: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Text(
+                                  'Catatan',
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .headlineMedium,
+                                ),
+                                // Butuh initial value
+                                TextFormField(
+                                  maxLines: 6,
+                                  initialValue: tempNote,
+                                  onChanged: (value) {
+                                    tempNote = value;
+                                  },
+                                ),
+                                ElevatedButton(
+                                  onPressed: () {
+                                    Navigator.pop(context, tempNote);
+                                  },
+                                  child: const Text('Simpan'),
+                                ),
+                              ],
+                            ),
+                          ),
+                        );
+                      },
+                    );
+                    // belum kelihatan hasilnya jika belum menambahkan widget
+                    if (note != null) {
+                      setState(() {
+                        _todoModel = _todoModel.copyWith(note: note);
+                      });
+                    }
+                  },
+                  child: _todoModel.note.isEmpty
+                      ? Container(
+                          width: double.infinity,
+                          padding: const EdgeInsets.all(16),
+                          decoration: BoxDecoration(
+                            border: Border.all(width: 0.5),
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: const Center(
+                            child: Text(
+                              'Ketuk untuk tambahkan catatan...',
+                            ),
+                          ),
+                        )
+                      : SizedBox(
+                          width: double.infinity,
+                          child: Text(
+                            _todoModel.note,
+                            style: const TextStyle(
+                              fontSize: 16,
+                            ),
+                          ),
+                        ),
                 ),
                 // LOKASI
                 const SizedBox(height: 25),
                 const Text('Lokasi'),
                 const SizedBox(height: 10),
-                Container(
-                  width: double.infinity,
-                  padding: const EdgeInsets.all(16),
-                  decoration: BoxDecoration(
-                    border: Border.all(width: 0.5),
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: const Center(
-                    child: Text(
-                      'Ketuk untuk tambahkan Lokasi',
-                    ),
+                MapsWidget(
+                  placeLocation: PlaceLocation(
+                    latitude: _todoModel.latitude,
+                    longitude: _todoModel.longitude,
                   ),
                 ),
                 const SizedBox(height: 25),
