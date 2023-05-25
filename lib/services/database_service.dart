@@ -48,4 +48,31 @@ class DatabaseService {
       'uid': uid,
     });
   }
+
+  Future updateTodo(TodoModel todoModel) {
+    return _collectionReference.doc(todoModel.id).update({
+      'title': todoModel.title,
+      'note': todoModel.note,
+      'location': GeoPoint(todoModel.latitude, todoModel.longitude),
+      'due_date':
+          todoModel.dueDate == null ? "" : todoModel.dueDate!.toIso8601String(),
+      'completed': todoModel.completed,
+      // Kapan terakhir kali di update
+      'updated_at': FieldValue.serverTimestamp(),
+    });
+  }
+
+  // Delete Todo
+  Future deleteTodo(String docId) {
+    return _collectionReference.doc(docId).delete();
+  }
+
+  // Fungsi Selesai / COmpleted
+  Future toogleComplete(TodoModel todoModel) {
+    return _collectionReference.doc(todoModel.id).update({
+      // diberi ! untuk jika true jadi false, begitupun kebalikannya
+      'completed': !todoModel.completed,
+      'updated_at': FieldValue.serverTimestamp(),
+    });
+  }
 }

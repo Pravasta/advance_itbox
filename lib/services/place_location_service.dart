@@ -1,5 +1,8 @@
 // Kalau punya bisa di Cloud google, tpi harus berbayar
+import 'dart:convert';
+
 import 'package:location/location.dart';
+import 'package:http/http.dart' as http;
 
 const googleApiKey = 'AIzaSyBOG-I3cbjw6bWKZpCGyHxrTNM2zgRZb08';
 // JANGAN LUPA TAMBAHKAN JUGA GOOGLE API KEY DI MANIFEST ANDROID DAN APP DELEGATE SWIFT
@@ -39,5 +42,21 @@ class LocationService {
     }
     // ini untuk dpatkan lokasi user dari gps
     return location.getLocation();
+  }
+
+  // Fungsi untuk memberi tulisan alamat koordinat di appbar
+  Future<String> getPlaceAddress(double latitude, double longitude) async {
+    // url nya dari geocoding api google
+    final url =
+        'https://maps.googleapis.com/maps/api/geocode/json?latlng=$latitude,$longitude&key=$googleApiKey';
+    final response = await http.get(Uri.parse(url));
+    if (response.statusCode == 200) {
+      final result = json.decode(response.body);
+      if (result['results'].length > 0) {
+        return result['results'][0]['formatted_address'];
+      }
+    }
+
+    return '';
   }
 }

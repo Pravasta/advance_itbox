@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:todos/function.dart';
 import 'package:todos/models/todo_models.dart';
 import 'package:todos/pages/screen/todo_detail_screen.dart';
 import 'package:todos/services/database_service.dart';
@@ -31,6 +32,7 @@ class TodoList extends StatelessWidget {
             itemCount: todoList!.length,
             itemBuilder: (context, index) {
               return Card(
+                color: todoList[index].completed ? Colors.grey : Colors.white,
                 child: ListTile(
                   onTap: () => Navigator.push(
                     context,
@@ -42,15 +44,17 @@ class TodoList extends StatelessWidget {
                   ),
                   leading: IconButton(
                     onPressed: () {},
-                    icon: const Icon(
-                      Icons.circle_outlined,
-                    ),
+                    icon: todoList[index].completed
+                        ? const Icon(Icons.check_outlined)
+                        : const Icon(
+                            Icons.circle_outlined,
+                          ),
                   ),
                   title: Text(todoList[index].title),
                   subtitle: todoList[index].dueDate == null
                       ? null
                       : Text(
-                          todoList[index].dueDate.toString(),
+                          formatDateTime(todoList[index].dueDate),
                         ),
                 ),
               );

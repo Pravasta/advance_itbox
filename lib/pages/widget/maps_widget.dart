@@ -4,8 +4,10 @@ import 'package:todos/pages/screen/map_screen.dart';
 import 'package:todos/services/place_location_service.dart';
 
 class MapsWidget extends StatelessWidget {
-  const MapsWidget({super.key, required this.placeLocation});
+  const MapsWidget(
+      {super.key, required this.placeLocation, required this.setLocationFn});
   final PlaceLocation placeLocation;
+  final Function(PlaceLocation placeLocation) setLocationFn;
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +22,10 @@ class MapsWidget extends StatelessWidget {
           context,
           MaterialPageRoute(
             builder: (context) {
-              return MapsScreen(initialLocation: placeLocation);
+              return MapsScreen(
+                initialLocation: placeLocation,
+                setLocationFn: setLocationFn,
+              );
             },
           ),
         );

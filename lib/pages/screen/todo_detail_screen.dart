@@ -3,6 +3,7 @@ import 'package:todos/function.dart';
 import 'package:todos/models/place_location_models.dart';
 import 'package:todos/models/todo_models.dart';
 import 'package:todos/pages/widget/maps_widget.dart';
+import 'package:todos/services/database_service.dart';
 
 class TodoDetailScreen extends StatefulWidget {
   const TodoDetailScreen({super.key, required this.todoModel});
@@ -26,6 +27,13 @@ class _TodoDetailScreenState extends State<TodoDetailScreen> {
     super.initState();
   }
 
+  void setLocation(PlaceLocation placeLocation) {
+    setState(() {
+      _todoModel = _todoModel.copyWith(
+          latitude: placeLocation.latitude, longitude: placeLocation.longitude);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -33,6 +41,18 @@ class _TodoDetailScreenState extends State<TodoDetailScreen> {
       child: Scaffold(
         appBar: AppBar(
           title: const Text('Todo Detail'),
+          actions: [
+            IconButton(
+              onPressed: () {
+                DatabaseService().deleteTodo(_todoModel.id);
+                Navigator.pop(context);
+              },
+              icon: const Icon(
+                Icons.delete,
+                color: Colors.red,
+              ),
+            ),
+          ],
         ),
         body: SingleChildScrollView(
           child: Container(
@@ -223,11 +243,15 @@ class _TodoDetailScreenState extends State<TodoDetailScreen> {
                     latitude: _todoModel.latitude,
                     longitude: _todoModel.longitude,
                   ),
+                  setLocationFn: setLocation,
                 ),
                 const SizedBox(height: 25),
                 // Button
                 ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    DatabaseService().updateTodo(_todoModel);
+                    Navigator.pop(context);
+                  },
                   child: const Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -240,7 +264,10 @@ class _TodoDetailScreenState extends State<TodoDetailScreen> {
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.green,
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                    DatabaseService().toogleComplete(_todoModel);
+                    Navigator.pop(context);
+                  },
                   child: const Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
