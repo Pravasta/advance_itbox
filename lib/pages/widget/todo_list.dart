@@ -34,16 +34,20 @@ class TodoList extends StatelessWidget {
               return Card(
                 color: todoList[index].completed ? Colors.grey : Colors.white,
                 child: ListTile(
-                  onTap: () => Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => TodoDetailScreen(
-                        todoModel: todoList[index],
-                      ),
-                    ),
-                  ),
+                  onTap: todoList[index].completed
+                      ? null
+                      : () => Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => TodoDetailScreen(
+                                todoModel: todoList[index],
+                              ),
+                            ),
+                          ),
                   leading: IconButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      DatabaseService().toogleComplete(todoList[index]);
+                    },
                     icon: todoList[index].completed
                         ? const Icon(Icons.check_outlined)
                         : const Icon(

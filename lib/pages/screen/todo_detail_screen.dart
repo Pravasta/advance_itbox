@@ -43,9 +43,33 @@ class _TodoDetailScreenState extends State<TodoDetailScreen> {
           title: const Text('Todo Detail'),
           actions: [
             IconButton(
-              onPressed: () {
-                DatabaseService().deleteTodo(_todoModel.id);
-                Navigator.pop(context);
+              onPressed: () async {
+                // Kenapa diberi ? karena jika tidak tekan tombol Yes atau No biar tidak error
+                bool? isDelete = await showDialog(
+                  context: context,
+                  builder: (context) {
+                    return AlertDialog(
+                      title: const Text('Hapus ToDo ?'),
+                      content: const Text(
+                          'Apakah kamu yakin untuk menghapus ToDo ?'),
+                      actions: [
+                        TextButton(
+                          onPressed: () => Navigator.pop(context, false),
+                          child: const Text('Tidak'),
+                        ),
+                        TextButton(
+                          onPressed: () => Navigator.pop(context, true),
+                          child: const Text('Ya'),
+                        ),
+                      ],
+                    );
+                  },
+                );
+                if (isDelete != null && isDelete) {
+                  DatabaseService().deleteTodo(_todoModel.id);
+                  if (!mounted) return;
+                  Navigator.pop(context);
+                }
               },
               icon: const Icon(
                 Icons.delete,

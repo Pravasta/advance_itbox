@@ -1,8 +1,6 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:todos/pages/widget/new_todo.dart';
-
-import '../widget/todo_list.dart';
+import 'package:todos/pages/screen/all_todo_screen.dart';
+import 'package:todos/pages/screen/profile_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -12,33 +10,42 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  // untuk pindah bottom navigationbar
+  int selectedIndex = 0;
+  static const List<Widget> _widget = [
+    AllTodoScreen(),
+    ProfileScreen(),
+  ];
+
+  // Untuk menentukan selected index ke berapa
+  void onItemTap(int index) {
+    setState(() {
+      selectedIndex = index;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     // untuk membuat focus layar ketika klik layar habis isi text keyboard menjadi turun
-    return GestureDetector(
-      onTap: () => FocusScope.of(context).requestFocus(FocusNode()),
-      child: Scaffold(
-        appBar: AppBar(
-          title: const Text('Advance ITBOX'),
-          centerTitle: true,
-          actions: [
-            IconButton(
-              onPressed: () {
-                FirebaseAuth.instance.signOut();
-              },
-              icon: const Icon(Icons.logout),
+    return Scaffold(
+      body: _widget[selectedIndex],
+      bottomNavigationBar: BottomNavigationBar(
+        items: const [
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.home,
             ),
-          ],
-        ),
-        body: const Column(
-          children: [
-            Expanded(
-              child: TodoList(),
+            label: 'All Todo',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.person,
             ),
-            // Dipindah ke widget lain agar tidak memerlukan banyaj memori karena setState
-            NewTodo(),
-          ],
-        ),
+            label: 'Profile',
+          ),
+        ],
+        currentIndex: selectedIndex,
+        onTap: onItemTap,
       ),
     );
   }
