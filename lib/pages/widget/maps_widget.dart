@@ -32,20 +32,44 @@ class MapsWidget extends StatelessWidget {
       },
       child: Container(
         width: double.infinity,
-        padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(
           border: Border.all(width: 0.5),
           borderRadius: BorderRadius.circular(10),
         ),
         child: previewMapsImageUrl.isEmpty
-            ? const Center(
-                child: Text(
-                  'Ketuk untuk tambahkan Lokasi',
+            ? const Padding(
+                padding: EdgeInsets.all(16.0),
+                child: Center(
+                  child: Text(
+                    'Ketuk untuk tambahkan Lokasi',
+                  ),
                 ),
               )
             // Sudah berhasil, tpi kalau 0.0 kita dittengah laut
-            : Image.network(
-                previewMapsImageUrl,
+            : Stack(
+                children: [
+                  Image.network(
+                    previewMapsImageUrl,
+                  ),
+                  Positioned(
+                    right: 0,
+                    child: IconButton(
+                      onPressed: () {
+                        // Begini saja sudah auto kehapus
+                        setLocationFn(
+                          PlaceLocation(
+                            latitude: 0.0,
+                            longitude: 0.0,
+                          ),
+                        );
+                      },
+                      icon: const Icon(
+                        Icons.delete,
+                        color: Colors.red,
+                      ),
+                    ),
+                  ),
+                ],
               ),
       ),
     );

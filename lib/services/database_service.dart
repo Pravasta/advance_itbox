@@ -45,7 +45,9 @@ class DatabaseService {
   Stream<List<TodoModel>> get todos {
     // Krena didalam snapshot berisi sebuah map, maka dapat di .Map
     return _collectionReference
+        .where('uid', isEqualTo: uid)
         .orderBy('completed')
+        .orderBy('due_date')
         .snapshots()
         // dimap lagi karena di docs ini berisi banyak data
         .map(_todoListFromSnapshot);
@@ -76,6 +78,7 @@ class DatabaseService {
       // Biar order by dari competed muncul
       'completed': false,
       'uid': uid,
+      'due_date': null,
     });
   }
 

@@ -42,7 +42,7 @@ class _AuthFormState extends State<AuthForm> {
           children: [
             TextFormField(
               key: const Key('email'),
-              initialValue: "tisaaini@gmail.com",
+              initialValue: "pravasta@gmail.com",
               decoration: const InputDecoration(
                 labelText: 'Email',
                 border: OutlineInputBorder(),
@@ -60,7 +60,7 @@ class _AuthFormState extends State<AuthForm> {
             const SizedBox(height: 10),
             if (!_isLogin)
               TextFormField(
-                initialValue: 'tisaaini',
+                initialValue: 'pravasta',
                 key: const Key('userName'),
                 decoration: const InputDecoration(
                   labelText: 'Username',
