@@ -4,7 +4,7 @@ import 'dart:convert';
 import 'package:location/location.dart';
 import 'package:http/http.dart' as http;
 
-const googleApiKey = 'AIzaSyBOG-I3cbjw6bWKZpCGyHxrTNM2zgRZb08';
+const googleApiKey = 'AIzaSyDBxM8Pafxgmq3fKTEIa9CbNg6ju7sByi0';
 // JANGAN LUPA TAMBAHKAN JUGA GOOGLE API KEY DI MANIFEST ANDROID DAN APP DELEGATE SWIFT
 
 class LocationService {
